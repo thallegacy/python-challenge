@@ -23,8 +23,10 @@ with open(pybank_csv, 'r') as csvfile:
        
        #add my elements to my lists
         TotalMonthsList.append(row[0])
-
+        TotalAmountList.append(int(row[1]))
+    
+    total= sum(TotalAmountList)
 
     #print my values
     print(f'Total Months: {len(TotalMonthsList)} ')
- 
+    print(f'Total Amount: ${total} ')
