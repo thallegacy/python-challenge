@@ -32,13 +32,18 @@ with open(pybank_csv, 'r') as csvfile:
         NetChangeList.append(netchange)
         previous = int(row[1])
     
+    # Get the Total Amount
     total= sum(TotalAmountList)
+    # Get the Average Changet
     NetChangeList.pop(0)
     averagechange  = sum(NetChangeList)/ len(NetChangeList)
-    index = NetChangeList.index(max(NetChangeList))
+    # Get indices to use for Increase and Decrease in Profits
+    maxindex = NetChangeList.index(max(NetChangeList))
+    minindex = NetChangeList.index(min(NetChangeList))
 
-    #print my values
+    #print my values to Git Bash
     print(f'Total Months: {len(TotalMonthsList)} ')
     print(f'Total Amount: ${total} ')
     print(f'Average Change: {round(averagechange,2)} ')
-    print(f'Greatest Increase in Profits: {TotalMonthsList[index+1]} (${max(NetChangeList)}) ')
+    print(f'Greatest Increase in Profits: {TotalMonthsList[maxindex+1]} (${max(NetChangeList)}) ')
+    print(f'Greatest Decrease in Profits: {TotalMonthsList[minindex+1]} (${min(NetChangeList)}) ')
