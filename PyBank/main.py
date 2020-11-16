@@ -42,8 +42,26 @@ with open(pybank_csv, 'r') as csvfile:
     minindex = NetChangeList.index(min(NetChangeList))
 
     #print my values to Git Bash
+
+    print("Financial Analysis")
+    print("----------------------------")
     print(f'Total Months: {len(TotalMonthsList)} ')
     print(f'Total Amount: ${total} ')
     print(f'Average Change: {round(averagechange,2)} ')
     print(f'Greatest Increase in Profits: {TotalMonthsList[maxindex+1]} (${max(NetChangeList)}) ')
     print(f'Greatest Decrease in Profits: {TotalMonthsList[minindex+1]} (${min(NetChangeList)}) ')
+
+    # Specify the file to write to
+output_path = os.path.join( "analysis", "financial_analysis.txt")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w', newline='') as textfile:
+    
+    # input the results in the text file
+    textfile.write('Financial Analysis ')
+    textfile.write('\n----------------------------')
+    textfile.write(f'\nTotal Months: {len(TotalMonthsList)} ')
+    textfile.write(f'\nTotal Amount: ${total} ')
+    textfile.write(f'\nAverage Change: {round(averagechange,2)} ')
+    textfile.write(f'\nGreatest Increase in Profits: {TotalMonthsList[maxindex+1]} (${max(NetChangeList)}) ')
+    textfile.write(f'\nGreatest Decrease in Profits: {TotalMonthsList[minindex+1]} (${min(NetChangeList)}) ')
