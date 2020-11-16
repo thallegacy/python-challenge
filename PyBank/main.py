@@ -28,15 +28,17 @@ with open(pybank_csv, 'r') as csvfile:
         TotalAmountList.append(int(row[1]))
         
         #Get the percent change and then add my elements to my lists
-        netchange=int(row[1]) - previous
+        netchange= int(row[1]) - previous
         NetChangeList.append(netchange)
-        previous =int(row[1])
+        previous = int(row[1])
     
     total= sum(TotalAmountList)
     NetChangeList.pop(0)
-    averagechange  =sum(NetChangeList)/ len(NetChangeList)
-    
+    averagechange  = sum(NetChangeList)/ len(NetChangeList)
+    index = NetChangeList.index(max(NetChangeList))
+
     #print my values
     print(f'Total Months: {len(TotalMonthsList)} ')
     print(f'Total Amount: ${total} ')
     print(f'Average Change: {round(averagechange,2)} ')
+    print(f'Greatest Increase in Profits: {TotalMonthsList[index+1]} (${max(NetChangeList)}) ')
