@@ -25,11 +25,18 @@ with open(pypoll_csv, 'r') as csvfile:
         TotalVoterIDList.append(row[0])
         TotalCandidateList.append(row[2])
 
-
+    #Get the count of each candidate and store it in variables
     Khan = TotalCandidateList.count("Khan")
     Correy = TotalCandidateList.count("Correy")
     Li = TotalCandidateList.count("Li")
     OTooley= TotalCandidateList.count("O'Tooley")
+    
+    #Get the vote percentages of each candidate and store it in variables
+    TotalCount = Khan + Correy + Li + OTooley
+    Khanpct = (Khan / TotalCount) * 100
+    Correypct = (Correy / TotalCount) * 100
+    Lipct = (Li / TotalCount) * 100
+    OTooleypct= (OTooley / TotalCount) * 100
     
     #print my values to Git Bash
 
@@ -37,7 +44,8 @@ with open(pypoll_csv, 'r') as csvfile:
     print("----------------------------")
     print(f'Total Votes: ({len(TotalVoterIDList)}) ')
     print("----------------------------")
-    print(f'Khan: ({Khan}) ')
-    print(f'Correy: ({Correy}) ')
-    print(f'Li: ({Li}) ')
-    print(f"O'Tooley: ({OTooley}) ")
+    print(f'Khan: {round(Khanpct,2)}% ({Khan}) ')
+    print(f'Correy: {round(Correypct,2)}% ({Correy}) ')
+    print(f'Li: {round(Lipct,2)}% ({Li}) ')
+    print(f"O'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
+
