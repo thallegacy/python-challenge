@@ -52,7 +52,7 @@ with open(pypoll_csv, 'r') as csvfile:
 
     print("Election Results")
     print("----------------------------")
-    print(f'Total Votes: ({len(TotalVoterIDList)}) ')
+    print(f'Total Votes: {len(TotalVoterIDList)} ')
     print("----------------------------")
     print(f'Khan: {round(Khanpct,2)}% ({Khan}) ')
     print(f'Correy: {round(Correypct,2)}% ({Correy}) ')
@@ -61,3 +61,22 @@ with open(pypoll_csv, 'r') as csvfile:
     print("----------------------------")
     print(f'Winner: {Winner} ')
     print("----------------------------")
+
+# Specify the file to write to
+output_path = os.path.join( "analysis", "election_results.txt")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w', newline='') as textfile:
+    
+    # input the results in the text file
+    textfile.write("Election Results")
+    textfile.write("\n----------------------------")
+    textfile.write(f'\nTotal Votes: {len(TotalVoterIDList)} ')
+    textfile.write("\n----------------------------")
+    textfile.write(f'\nKhan: {round(Khanpct,2)}% ({Khan}) ')
+    textfile.write(f'\nCorrey: {round(Correypct,2)}% ({Correy}) ')
+    textfile.write(f'\nLi: {round(Lipct,2)}% ({Li}) ')
+    textfile.write(f"\nO'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
+    textfile.write("\n----------------------------")
+    textfile.write(f'\nWinner: {Winner} ')
+    textfile.write("\n----------------------------")
