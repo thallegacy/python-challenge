@@ -13,6 +13,7 @@ with open(pypoll_csv, 'r') as csvfile:
 
     # Set your initial storage for list
     TotalVoterIDList = []
+    TotalCandidateList = []
 
     # Read and store the header row first (use next to read through data after the header)
     csv_header = next(csvreader)
@@ -22,11 +23,21 @@ with open(pypoll_csv, 'r') as csvfile:
        
        #add my elements to my lists
         TotalVoterIDList.append(row[0])
-  
+        TotalCandidateList.append(row[2])
 
+
+    Khan = TotalCandidateList.count("Khan")
+    Correy = TotalCandidateList.count("Correy")
+    Li = TotalCandidateList.count("Li")
+    OTooley= TotalCandidateList.count("O'Tooley")
+    
     #print my values to Git Bash
 
     print("Election Results")
     print("----------------------------")
-    print(f'Total Votes: {len(TotalVoterIDList)} ')
-# 
+    print(f'Total Votes: ({len(TotalVoterIDList)}) ')
+    print("----------------------------")
+    print(f'Khan: ({Khan}) ')
+    print(f'Correy: ({Correy}) ')
+    print(f'Li: ({Li}) ')
+    print(f"O'Tooley: ({OTooley}) ")
