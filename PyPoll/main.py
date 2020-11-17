@@ -38,6 +38,16 @@ with open(pypoll_csv, 'r') as csvfile:
     Lipct = (Li / TotalCount) * 100
     OTooleypct= (OTooley / TotalCount) * 100
     
+    # Find the winning candidate
+    if Khan > Correy and Khan > Li and Khan > OTooley:
+        Winner = "Khan"
+    elif Correy > Khan and Correy > Li and Correy > OTooley:
+        Winner = "Correy"
+    elif Li > Khan and Li > Correy and Li > OTooley:
+        Winner = "Li"
+    else:
+        Winner = "O'Tooley"    
+    
     #print my values to Git Bash
 
     print("Election Results")
@@ -48,4 +58,6 @@ with open(pypoll_csv, 'r') as csvfile:
     print(f'Correy: {round(Correypct,2)}% ({Correy}) ')
     print(f'Li: {round(Lipct,2)}% ({Li}) ')
     print(f"O'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
-
+    print("----------------------------")
+    print(f'Winner: {Winner} ')
+    print("----------------------------")
