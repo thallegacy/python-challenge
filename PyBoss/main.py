@@ -2,18 +2,29 @@ import os
 import csv
 
 # Path to collect data from the Resources folder
-pypoll_csv = os.path.join( 'Resources', 'election_data.csv')
+pyboss_csv = os.path.join( 'Resources', 'employee_data.csv')
 
 
 # Read in the CSV file
-with open(pypoll_csv, 'r') as csvfile:
+with open(pyboss_csv, 'r') as csvfile:
 
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
 
     # Set your initial storage for list
-    TotalVoterIDList = []
-    TotalCandidateList = []
+    EmployeeIDList = []
+    # Name Lists
+    NameList = []
+    FirstNameList = []
+    LastNameList = []
+    # Date Lists
+    DateList = []
+    Month = []
+    Day = []
+    Year = []
+    # SSN Lists
+    SSNList = []
+    Last4SSN = []
 
     # Read and store the header row first (use next to read through data after the header)
     csv_header = next(csvreader)
@@ -22,61 +33,30 @@ with open(pypoll_csv, 'r') as csvfile:
     for row in csvreader:
        
        #add my elements to my lists
-        TotalVoterIDList.append(row[0])
-        TotalCandidateList.append(row[2])
+        EmployeeIDList.append(row[0])
+        NameList.append(row[1])
+        DateList.append(row[2])
+        SSNList.append(row[3])
 
-    #Get the count of each candidate and store it in variables
-    Khan = TotalCandidateList.count("Khan")
-    Correy = TotalCandidateList.count("Correy")
-    Li = TotalCandidateList.count("Li")
-    OTooley= TotalCandidateList.count("O'Tooley")
-    
-    #Get the vote percentages of each candidate and store it in variables
-    TotalCount = Khan + Correy + Li + OTooley
-    Khanpct = (Khan / TotalCount) * 100
-    Correypct = (Correy / TotalCount) * 100
-    Lipct = (Li / TotalCount) * 100
-    OTooleypct= (OTooley / TotalCount) * 100
-    
-    # Find the winning candidate
-    if Khan > Correy and Khan > Li and Khan > OTooley:
-        Winner = "Khan"
-    elif Correy > Khan and Correy > Li and Correy > OTooley:
-        Winner = "Correy"
-    elif Li > Khan and Li > Correy and Li > OTooley:
-        Winner = "Li"
-    else:
-        Winner = "O'Tooley"    
-    
-    #print my values to Git Bash
+    # Loop through the Namelist to split First and Last Name
+    for Name in NameList:
+        FirstNameList.append(Name.split()[0])
+        LastNameList.append(Name.split()[1])
+ 
+    # Loop through the Datelist to get Day Month and Year
+    for Date in DateList:
+        Month.append(Date.split("-")[1])
+        Day.append(Date.split("-")[2])
+        Year.append(Date.split("-")[0])
 
-    print("Election Results")
-    print("----------------------------")
-    print(f'Total Votes: {len(TotalVoterIDList)} ')
-    print("----------------------------")
-    print(f'Khan: {round(Khanpct,2)}% ({Khan}) ')
-    print(f'Correy: {round(Correypct,2)}% ({Correy}) ')
-    print(f'Li: {round(Lipct,2)}% ({Li}) ')
-    print(f"O'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
-    print("----------------------------")
-    print(f'Winner: {Winner} ')
-    print("----------------------------")
-
-# Specify the file to write to
-output_path = os.path.join( "analysis", "election_results.txt")
-
-# Open the file using "write" mode. Specify the variable to hold the contents
-with open(output_path, 'w', newline='') as textfile:
+    # Use List comprehension to loop and zip list to merge the date to format mm/dd/yyyy
+    DateConverted = [i +"/" + j +"/"+ k for i, j, k in zip(Month, Day, Year)]
     
-    # input the results in the text file
-    textfile.write("Election Results")
-    textfile.write("\n----------------------------")
-    textfile.write(f'\nTotal Votes: {len(TotalVoterIDList)} ')
-    textfile.write("\n----------------------------")
-    textfile.write(f'\nKhan: {round(Khanpct,2)}% ({Khan}) ')
-    textfile.write(f'\nCorrey: {round(Correypct,2)}% ({Correy}) ')
-    textfile.write(f'\nLi: {round(Lipct,2)}% ({Li}) ')
-    textfile.write(f"\nO'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
-    textfile.write("\n----------------------------")
-    textfile.write(f'\nWinner: {Winner} ')
-    textfile.write("\n----------------------------")
+    for SSN in SSNList:
+        Last4SSN.append(SSN.split("-")[2])
+
+    # Use List comprehension to loop and change SSN to ***-**-NNNN format
+    SSNConverted = ["***-**-" + l for l in Last4SSN]
+    print(SSNConverted)
+    
+
