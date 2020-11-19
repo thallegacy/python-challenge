@@ -31,6 +31,7 @@ with open(pyboss_csv, 'r') as csvfile:
     
     # State Lists
     states_list = []
+    state_code =[]
     us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -82,7 +83,7 @@ with open(pyboss_csv, 'r') as csvfile:
     'West Virginia': 'WV',
     'Wisconsin': 'WI',
     'Wyoming': 'WY',
-}
+    }   
     # Read and store the header row first (use next to read through data after the header)
     csv_header = next(csvreader)
 
@@ -108,16 +109,34 @@ with open(pyboss_csv, 'r') as csvfile:
         year.append(date.split("-")[0])
 
     # Use List comprehension to loop and zip list to merge the date to format mm/dd/yyyy
-    date_converted = [i +"/" + j +"/"+ k for i, j, k in zip(month, day, year)]
+    dob = [i +"/" + j +"/"+ k for i, j, k in zip(month, day, year)]
     
     for ssn in ssn_list:
         last_4ssn.append(ssn.split("-")[2])
 
     # Use List comprehension to loop and change SSN to ***-**-NNNN format
-    ssn_converted = ["***-**-" + l for l in last_4ssn]
+    ssn_hide = ["***-**-" + l for l in last_4ssn]
    
     
     # Loop through the states list to identify the state abbreviation in the dictionary
     for state in states_list:
-        state_code = us_state_abbrev[state]
+        state_abbrev = us_state_abbrev[state]
+        state_code.append(state_abbrev)
         
+
+# Zip all lists together into tuples for a record
+employee_roster = zip(employee_id_list, first_name_list, last_name_list, dob, ssn_hide, state_code)      
+
+
+# save the output file path
+output_file = os.path.join("Output","employee_roster.csv")
+
+# open the output file
+with open(output_file, "w", newline='') as datafile:
+    writer = csv.writer(datafile)
+
+    #create a header row
+    writer.writerow(["Emp ID", "First Name","Last Name", "DOB", "SSN", "State"])
+
+    #write the zipped object to the csv
+    writer.writerows(employee_roster)
