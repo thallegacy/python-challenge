@@ -12,51 +12,112 @@ with open(pyboss_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
     # Set your initial storage for list
-    EmployeeIDList = []
+    employee_id_list = []
+    
     # Name Lists
-    NameList = []
-    FirstNameList = []
-    LastNameList = []
+    name_list = []
+    first_name_list = []
+    last_name_list = []
+    
     # Date Lists
-    DateList = []
-    Month = []
-    Day = []
-    Year = []
+    date_list = []
+    month = []
+    day = []
+    year = []
+    
     # SSN Lists
-    SSNList = []
-    Last4SSN = []
-
+    ssn_list = []
+    last_4ssn = []
+    
+    # State Lists
+    states_list = []
+    us_state_abbrev = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY',
+}
     # Read and store the header row first (use next to read through data after the header)
     csv_header = next(csvreader)
 
     # Loop through the data after the header
     for row in csvreader:
        
-       #add my elements to my lists
-        EmployeeIDList.append(row[0])
-        NameList.append(row[1])
-        DateList.append(row[2])
-        SSNList.append(row[3])
+       #add each column to a separate lists
+        employee_id_list.append(row[0])
+        name_list.append(row[1])
+        date_list.append(row[2])
+        ssn_list.append(row[3])
+        states_list.append(row[4])
 
-    # Loop through the Namelist to split First and Last Name
-    for Name in NameList:
-        FirstNameList.append(Name.split()[0])
-        LastNameList.append(Name.split()[1])
+    # Loop through the name_list to split First and Last Name
+    for name in name_list:
+        first_name_list.append(name.split()[0])
+        last_name_list.append(name.split()[1])
  
-    # Loop through the Datelist to get Day Month and Year
-    for Date in DateList:
-        Month.append(Date.split("-")[1])
-        Day.append(Date.split("-")[2])
-        Year.append(Date.split("-")[0])
+    # Loop through the date_list to get day month and year
+    for date in date_list:
+        month.append(date.split("-")[1])
+        day.append(date.split("-")[2])
+        year.append(date.split("-")[0])
 
     # Use List comprehension to loop and zip list to merge the date to format mm/dd/yyyy
-    DateConverted = [i +"/" + j +"/"+ k for i, j, k in zip(Month, Day, Year)]
+    date_converted = [i +"/" + j +"/"+ k for i, j, k in zip(month, day, year)]
     
-    for SSN in SSNList:
-        Last4SSN.append(SSN.split("-")[2])
+    for ssn in ssn_list:
+        last_4ssn.append(ssn.split("-")[2])
 
     # Use List comprehension to loop and change SSN to ***-**-NNNN format
-    SSNConverted = ["***-**-" + l for l in Last4SSN]
-    print(SSNConverted)
+    ssn_converted = ["***-**-" + l for l in last_4ssn]
+   
     
-
+    # Loop through the states list to identify the state abbreviation in the dictionary
+    for state in states_list:
+        state_code = us_state_abbrev[state]
+        
