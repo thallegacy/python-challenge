@@ -12,8 +12,8 @@ with open(pypoll_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
     # Set your initial storage for list
-    TotalVoterIDList = []
-    TotalCandidateList = []
+    total_voterid_list = []
+    total_candidate_list = []
 
     # Read and store the header row first (use next to read through data after the header)
     csv_header = next(csvreader)
@@ -22,44 +22,44 @@ with open(pypoll_csv, 'r') as csvfile:
     for row in csvreader:
        
        #add my elements to my lists
-        TotalVoterIDList.append(row[0])
-        TotalCandidateList.append(row[2])
+        total_voterid_list.append(row[0])
+        total_candidate_list.append(row[2])
 
     #Get the count of each candidate and store it in variables
-    Khan = TotalCandidateList.count("Khan")
-    Correy = TotalCandidateList.count("Correy")
-    Li = TotalCandidateList.count("Li")
-    OTooley= TotalCandidateList.count("O'Tooley")
+    khan = total_candidate_list.count("Khan")
+    correy = total_candidate_list.count("Correy")
+    li = total_candidate_list.count("Li")
+    otooley= total_candidate_list.count("O'Tooley")
     
     #Get the vote percentages of each candidate and store it in variables
-    TotalCount = Khan + Correy + Li + OTooley
-    Khanpct = (Khan / TotalCount) * 100
-    Correypct = (Correy / TotalCount) * 100
-    Lipct = (Li / TotalCount) * 100
-    OTooleypct= (OTooley / TotalCount) * 100
+    total_count = khan + correy + li + otooley
+    khanpct = (khan / total_count) * 100
+    correypct = (correy / total_count) * 100
+    lipct = (li / total_count) * 100
+    otooleypct= (otooley / total_count) * 100
     
     # Find the winning candidate
-    if Khan > Correy and Khan > Li and Khan > OTooley:
-        Winner = "Khan"
-    elif Correy > Khan and Correy > Li and Correy > OTooley:
-        Winner = "Correy"
-    elif Li > Khan and Li > Correy and Li > OTooley:
-        Winner = "Li"
+    if khan > correy and khan > li and khan > otooley:
+        winner = "Khan"
+    elif correy > khan and correy > li and correy > otooley:
+        winner = "Correy"
+    elif li > khan and li > correy and li > otooley:
+        winner = "Li"
     else:
-        Winner = "O'Tooley"    
+        winner = "O'Tooley"    
     
     #print my values to Git Bash
 
     print("Election Results")
     print("----------------------------")
-    print(f'Total Votes: {len(TotalVoterIDList)} ')
+    print(f'Total Votes: {len(total_voterid_list)} ')
     print("----------------------------")
-    print(f'Khan: {round(Khanpct,2)}% ({Khan}) ')
-    print(f'Correy: {round(Correypct,2)}% ({Correy}) ')
-    print(f'Li: {round(Lipct,2)}% ({Li}) ')
-    print(f"O'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
+    print(f'Khan: {round(khanpct,2)}% ({khan}) ')
+    print(f'Correy: {round(correypct,2)}% ({correy}) ')
+    print(f'Li: {round(lipct,2)}% ({li}) ')
+    print(f"O'Tooley: {round(otooleypct,2)}% ({otooley}) ")
     print("----------------------------")
-    print(f'Winner: {Winner} ')
+    print(f'Winner: {winner} ')
     print("----------------------------")
 
 # Specify the file to write to
@@ -71,12 +71,12 @@ with open(output_path, 'w', newline='') as textfile:
     # input the results in the text file
     textfile.write("Election Results")
     textfile.write("\n----------------------------")
-    textfile.write(f'\nTotal Votes: {len(TotalVoterIDList)} ')
+    textfile.write(f'\nTotal Votes: {len(total_voterid_list)} ')
     textfile.write("\n----------------------------")
-    textfile.write(f'\nKhan: {round(Khanpct,2)}% ({Khan}) ')
-    textfile.write(f'\nCorrey: {round(Correypct,2)}% ({Correy}) ')
-    textfile.write(f'\nLi: {round(Lipct,2)}% ({Li}) ')
-    textfile.write(f"\nO'Tooley: {round(OTooleypct,2)}% ({OTooley}) ")
+    textfile.write(f'\nKhan: {round(khanpct,2)}% ({khan}) ')
+    textfile.write(f'\nCorrey: {round(correypct,2)}% ({correy}) ')
+    textfile.write(f'\nLi: {round(lipct,2)}% ({li}) ')
+    textfile.write(f"\nO'Tooley: {round(otooleypct,2)}% ({otooley}) ")
     textfile.write("\n----------------------------")
-    textfile.write(f'\nWinner: {Winner} ')
+    textfile.write(f'\nWinner: {winner} ')
     textfile.write("\n----------------------------")
